@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "./web_pages/src/web_pages",
+        "./web_pages/src/web_pages/core",
+        "./web_pages",
+        "./web_pages/core"
+    ]
+}
