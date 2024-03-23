@@ -3,7 +3,7 @@ from abc import ABCMeta
 
 
 from selenium.webdriver.common.by import By
-from core import page_model
+from web_pages.core import page_model
 
 __all__ = ["StandardPageModel"]
 

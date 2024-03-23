@@ -20,7 +20,7 @@ from web_pages import pages
 
 # List of all supported page models that can be directly looked up
 PAGE_MODELS = [
-    #pages.config.account.AccountPage,
+    pages.inventory.inventory.InventoryPage
 ]
 
 URL_MAP = {page.url: page for page in PAGE_MODELS}

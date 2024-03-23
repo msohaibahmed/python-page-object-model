@@ -48,7 +48,7 @@ class ExtendedWebElement(WebElement):
     """Extend the WebElement with functionality"""
 
     def __init__(self, parent, id, extension_factory, timeout, **kwargs):
-        super(ExtendedWebElement, self)._init(parent, id, **kwargs)
+        super(ExtendedWebElement, self).__init__(parent, id, **kwargs)
         self._extension_factory = extension_factory
         self.timeout = timeout
         if not self.selector(self):
@@ -59,7 +59,7 @@ class ExtendedWebElement(WebElement):
         if PY2:
             web_element = cls(
                 parent=web_element._parent,  # pylint:disable=protected-access
-                id_=web_element._id,  # pylint:disable=protected-access
+                id=web_element._id,  # pylint:disable=protected-access
                 extension_factory=extension_factory,
                 timeout=timeout,
                 w3c=web_element._w3c,  # pylint:disable=protected-access
@@ -68,7 +68,7 @@ class ExtendedWebElement(WebElement):
         else:
             web_element = cls(
                 parent=web_element._parent,  # pylint:disable=protected-access
-                id_=web_element._id,  # pylint:disable=protected-access
+                id=web_element._id,  # pylint:disable=protected-access
                 extension_factory=extension_factory,
                 timeout=timeout,
                 **kwargs
@@ -101,25 +101,6 @@ class ExtendedWebElement(WebElement):
         # element_to_be_clickable from the expected_conditions module.
         target = visibility_of(self)(self)
         return bool(target and target.is_enabled())
-
-    def find_parsley_error(self):
-        """Find the associated parsley error tag(s)"""
-        # Check first if we have a manually defined error container:
-        parsley_container = self.get_attribute("data-parsley-errors-container")
-        if parsley_container:
-            return self._create_element_from_factory(
-                web_element=self.parent.find_element(By.CSS_SELECTOR, parsley_container),
-            )
-
-        # Otherwise use the automatically generated parsley ID
-        parsley_id = self.get_attribute("data-parsley-id")
-        if parsley_id is None:
-            raise AttributeError(
-                "Missing 'data-parsley-errors-container' and 'data-parsley-id' attribute"
-            )
-        return self._create_element_from_factory(
-            web_element=self.parent.find_element(By.ID, "parsley-id-{}".format(parsley_id)),
-        )
 
     def following_sibling(self):
         return self._create_element_from_factory(
@@ -631,7 +612,7 @@ class WebElementExtension(object):
             web_element, extension_factory=self, timeout=timeout, **kwargs
         )
 
-    def _call_(self, web_element, timeout, **kwargs):
+    def __call__(self, web_element, timeout, **kwargs):
         return self._select_extension(web_element=web_element, timeout=timeout, **kwargs)
 
 

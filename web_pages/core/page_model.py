@@ -381,7 +381,7 @@ class _WebElement(_PageElement):
         :param parent_page: Page object to which this element is attached
         :type parent_page: m3d_blackbox.pages.page_model._PageObjectModel
         :return: The registered extension matching the underlying WebElement
-        :rtype: m3d_blackbox.pages.elements.ExtendedWebElement
+        :rtype:
         """
         if self.use_cache and self._cache:
             return self._cache
@@ -427,7 +427,7 @@ class _WebElements(_PageElement):
         :param parent_page: Page object to which this element is attached
         :type parent_page: m3d_blackbox.pages.page_model._PageObjectModel
         :return: A list of registered extensions matching the underlying WebElements
-        :rtype: list(m3d_blackbox.pages.elements.ExtendedWebElement)
+        :rtype:
         """
         if self.use_cache and self._cache:
             return self._cache
